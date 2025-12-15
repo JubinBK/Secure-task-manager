@@ -1,13 +1,8 @@
-﻿The vulnerabilities listed below are present within the application:
-
-Insecure Direct Object Reference (Broken Access Control) - Although Views do check for authorization of the Task ID parameter provided in the request URL, they do not check if the User associated with that parameter is indeed the Owner of the Task.
-
-Cross-Site Request Forgery (CSRF) - There are no CSRF Tokens used to verify User requests for State Changes from the Insecure HTTP message method.
-
-SQL Injection - Submitted User Input data is not validated or checked prior to being used in Database Queries.
-
-Stored/Persistent Cross-Site Scripting (XSS) – The displayed comments made by Users are rendered through the |safe filter within Templates and are not automatically HTML escaped, thus allowing Forgeries containing Malicious JavaScript code to execute within the Browsers of all Users that view the Comments, including those who are not participating in an attack.
-
-Insecure Data Binding (Mass Assignment / Privilege Escalation) - Users may gain Administrator Level Access to the system by submitting Payloads using the Profile Update View.
-
-
+The template directory contains the html files of the secure app and vulnerable app.
+it describes the details of the vulnerabilities and its fixes in a short point manner.
+The login page contains login credential checks and the new user registration button.
+for the vulnerable app, SQL injection is possible . so in order to assist that a small info box is also given.
+The secure app login also has the same functionalities as the vulnerable app but is not vulnerable to SQL attack in the login page.
+The secure app manager is an django project designed to maintain the lists of tasks and manage them.
+the users can add,update,read and delete the tasks as per the user wish.
+only the admin can view the number of users list.
