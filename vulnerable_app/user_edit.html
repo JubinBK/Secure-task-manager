@@ -1,0 +1,35 @@
+{% extends 'vulnerable_app/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2>Edit User: {{ user_to_edit.username }}</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Username:</label>
+            <input type="text" name="username" value="{{ user_to_edit.username }}">
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ user_to_edit.email }}">
+        </div>
+        <div class="form-group">
+            <label>Bio:</label>
+            <textarea name="bio" rows="4">{{ user_to_edit.bio }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_admin" {% if user_to_edit.is_admin %}checked{% endif %}>
+                Is Admin
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Update User</button>
+    </form>
+
+    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+        <h3 style="color: var(--danger-color);">Danger Zone</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Deleting a user is permanent and cannot be undone.</p>
+        <a href="{% url 'vulnerable_user_delete' user_to_edit.id %}" class="btn btn-danger"
+            onclick="return confirm('Are you sure you want to delete this user?');">Delete User</a>
+    </div>
+</div>
+{% endblock %}

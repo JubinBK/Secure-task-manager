@@ -1,0 +1,12 @@
+{% extends 'secure_app/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 0 auto;">
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Register</button>
+    </form>
+</div>
+{% endblock %}

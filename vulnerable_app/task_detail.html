@@ -1,0 +1,43 @@
+{% extends 'vulnerable_app/base.html' %}
+
+{% block content %}
+<div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: start;">
+        <div style="flex: 1;">
+            <h2>{{ task.title }}</h2>
+            <p style="font-size: 1.1rem;">{{ task.description }}</p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 1rem;">
+            <span class="tag {% if task.completed %}tag-secure{% else %}tag-vulnerable{% endif %}">
+                {% if task.completed %}Completed{% else %}Pending{% endif %}
+            </span>
+            <a href="{% url 'vulnerable_task_toggle' task.id %}"
+                class="btn {% if task.completed %}btn-secondary{% else %}btn-primary{% endif %}">
+                {% if task.completed %}Mark as Pending{% else %}Mark as Complete{% endif %}
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h3>Comments</h3>
+    <ul class="comment-list">
+        {% for comment in comments %}
+        <li>
+            <div style="font-weight: 600; margin-bottom: 0.25rem;">{{ comment.author.username }}:</div>
+            <div>{{ comment.content|safe }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h4 style="margin-top: 2rem;">Add Comment</h4>
+    <form method="post">
+        <div class="form-group">
+            <textarea name="content" rows="3" placeholder="Write a comment..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+        <p class="code-block" style="margin-top: 1rem;">Try XSS: <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
+        </p>
+    </form>
+</div>
+{% endblock %}

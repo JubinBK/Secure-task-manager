@@ -1,0 +1,36 @@
+{% extends 'vulnerable_app/base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <h2>Task List</h2>
+    <a href="{% url 'vulnerable_task_create' %}" class="btn btn-primary">Create New Task</a>
+</div>
+
+<div class="card">
+    <form method="get" style="display: flex; gap: 1rem; margin-bottom: 0;">
+        <input type="text" name="q" placeholder="Search tasks..." style="flex: 1;">
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </form>
+    <p class="code-block" style="margin-top: 1rem;">Try SQL Injection:
+        <code>%' UNION SELECT 1, username, password, 1, 1, 1 FROM vulnerable_app_vulnerableuser --</code>
+    </p>
+</div>
+
+<ul class="task-list">
+    {% for task in tasks %}
+    <li>
+        <div>
+            <a href="{% url 'vulnerable_task_detail' task.id %}">Task #{{ task.id }}</a>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">Assigned to: {{ task.assigned_to.username }}</div>
+        </div>
+        {% if task.completed %}
+        <span class="tag tag-secure">Completed</span>
+        {% else %}
+        <span class="tag tag-vulnerable">Pending</span>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li style="justify-content: center; color: var(--text-muted);">No tasks found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
