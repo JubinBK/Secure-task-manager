@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="theme-vulnerable">
+
+<head>
+    <title>Vulnerable Task Manager</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <div class="nav-links">
+                <span class="tag tag-vulnerable">VULNERABLE MODE</span>
+                {% if request.session.user_id %}
+                <a href="{% url 'vulnerable_task_list' %}">Tasks</a>
+                <a href="{% url 'vulnerable_profile' %}">Profile</a>
+                {% if request.session.is_admin %}
+                <a href="{% url 'vulnerable_user_list' %}">Edit Users</a>
+                {% endif %}
+                <a href="{% url 'vulnerable_logout' %}">Logout</a>
+                {% else %}
+                <a href="{% url 'vulnerable_login' %}">Login</a>
+                <a href="{% url 'vulnerable_register' %}">Register</a>
+                {% endif %}
+                <a href="{% url 'home' %}">Home</a>
+            </div>
+            {% if request.session.username %}
+            <div class="user-info">
+                Logged in as: <strong>{{ request.session.username }}</strong>
+                {% if request.session.is_admin %}<span style="color: var(--danger-color);"> (Admin)</span>{% endif %}
+            </div>
+            {% endif %}
+        </div>
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

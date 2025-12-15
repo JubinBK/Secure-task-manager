@@ -1,0 +1,29 @@
+{% extends 'secure_app/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2>Profile</h2>
+    <div style="display: grid; gap: 1rem;">
+        <div
+            style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            <strong>Username:</strong>
+            <span>{{ user.username }}</span>
+        </div>
+        <div
+            style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            <strong>Email:</strong>
+            <span>{{ user.email }}</span>
+        </div>
+        <div
+            style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            <strong>First Name:</strong>
+            <span>{{ user.first_name }}</span>
+        </div>
+        <div
+            style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+            <strong>Last Name:</strong>
+            <span>{{ user.last_name }}</span>
+        </div>
+    </div>
+</div>
+{% endblock %}

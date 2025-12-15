@@ -1,0 +1,37 @@
+{% extends 'secure_app/base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2>Edit User: {{ user_to_edit.username }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ user_to_edit.email }}">
+        </div>
+        <div class="form-group">
+            <label>First Name:</label>
+            <input type="text" name="first_name" value="{{ user_to_edit.first_name }}">
+        </div>
+        <div class="form-group">
+            <label>Last Name:</label>
+            <input type="text" name="last_name" value="{{ user_to_edit.last_name }}">
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="is_superuser" {% if user_to_edit.is_superuser %}checked{% endif %}>
+                Is Superuser (Admin)
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary">Update User</button>
+    </form>
+
+    {% if user_to_edit != user %}
+    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+        <h3 style="color: var(--danger-color);">Danger Zone</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Deleting a user is permanent and cannot be undone.</p>
+        <a href="{% url 'secure_user_delete' user_to_edit.id %}" class="btn btn-danger">Delete User</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

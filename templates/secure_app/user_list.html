@@ -1,0 +1,24 @@
+{% extends 'secure_app/base.html' %}
+
+{% block content %}
+<div class="card">
+    <h2>User Management (Secure)</h2>
+    <p>Manage all users in the system. Only accessible by Superusers.</p>
+</div>
+
+<ul class="task-list">
+    {% for user in users %}
+    <li>
+        <div>
+            <a href="{% url 'secure_user_edit' user.id %}" style="font-weight: 600; font-size: 1.1rem;">EDIT</a>
+            <div style="font-size: 0.9rem; color: var(--text-muted);">{{ user.email }} <br> {{ user.username }}</div>
+        </div>
+        {% if user.is_superuser %}
+        <span class="tag tag-vulnerable">Superuser</span>
+        {% else %}
+        <span class="tag tag-secure">User</span>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

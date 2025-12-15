@@ -1,0 +1,34 @@
+{% extends 'secure_app/base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <h2>My Tasks</h2>
+    <a href="{% url 'secure_task_create' %}" class="btn btn-primary">Create New Task</a>
+</div>
+
+<div class="card">
+    <form method="get" style="display: flex; gap: 1rem; margin-bottom: 0;">
+        <input type="text" name="q" placeholder="Search tasks..." value="{{ request.GET.q|default:'' }}"
+            style="flex: 1;">
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </form>
+</div>
+
+<ul class="task-list">
+    {% for task in tasks %}
+    <li>
+        <div>
+            <a href="{% url 'secure_task_detail' task.id %}" style="font-weight: 600; font-size: 1.1rem;">EDIT</a> <br>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Task</p>
+        </div>
+        {% if task.completed %}
+        <span class="tag tag-secure">Completed</span>
+        {% else %}
+        <span class="tag tag-vulnerable">Pending</span>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li style="justify-content: center; color: var(--text-muted);">No tasks found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

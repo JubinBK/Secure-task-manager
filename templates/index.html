@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SecureTask Manager Project</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class="container hero">
+        <h1>SecureTask Manager</h1>
+        <p style="font-size: 1.2rem; color: var(--text-muted);">Secure Web Development Project</p>
+
+        <div class="split-view">
+            <div class="card split-card theme-vulnerable" style="border-top: 5px solid var(--danger-color);">
+                <h2>Vulnerable Version</h2>
+                <p>Intentionally insecure application demonstrating common vulnerabilities.</p>
+                <div style="margin: 2rem 0;">
+                    <span class="tag tag-vulnerable">SQL Injection</span>
+                    <span class="tag tag-vulnerable">XSS</span>
+                    <span class="tag tag-vulnerable">IDOR</span>
+                </div>
+                <a href="{% url 'vulnerable_login' %}" class="btn btn-danger">
+                    Enter Vulnerable App
+                </a>
+            </div>
+
+            <div class="card split-card theme-secure" style="border-top: 5px solid var(--success-color);">
+                <h2>Secure Version</h2>
+                
+                <p>Patched application demonstrating secure coding practices and defenses.</p>
+                <div style="margin: 2rem 0;">
+                    <span class="tag tag-secure">ORM Protection</span>
+                    <span class="tag tag-secure">Auto-Escaping</span>
+                    <span class="tag tag-secure">Access Control</span>
+                </div>
+                <a href="{% url 'secure_login' %}" class="btn btn-primary">
+                    Enter Secure App
+                </a>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 3rem; text-align: left;">
+            <h3>Project Overview</h3>
+            <p>This project demonstrates the <strong>OWASP Top 10</strong> vulnerabilities and their mitigation using
+                Django.</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h4>Vulnerabilities Demonstrated:</h4>
+                    <ul>
+                        <li> <strong>SQL Injection</strong>: Login bypass & data dumping</li>
+                        <li> <strong>Broken Access Control</strong>: IDOR in task viewing</li>
+                        <li> <strong>Cross-Site Scripting (XSS)</strong>: Stored XSS in comments</li>
+                        <li> <strong>Security Misconfiguration</strong>: Insecure settings</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Security Features Implemented:</h4>
+                    <ul>
+                        <li> <strong>Django ORM</strong>: Parameterized queries</li>
+                        <li> <strong>Object-Level Permissions</strong>: User ownership checks</li>
+                        <li> <strong>Template Auto-Escaping</strong>: XSS prevention</li>
+                        <li> <strong>Secure Headers & CSRF</strong>: Built-in protection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
